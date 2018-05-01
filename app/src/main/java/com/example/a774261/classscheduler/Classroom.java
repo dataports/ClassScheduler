@@ -40,5 +40,10 @@ public class Classroom {
         this.roomName = roomName;
     }
 
-
+    @Override
+    public String toString() {
+        return "Classroom{" +
+                "Room Booked is:'" + roomName + '\'' +
+                '}';
+    }
 }
