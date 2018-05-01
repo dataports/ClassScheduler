@@ -4,9 +4,9 @@ import java.util.Date;
 
 //define a 10 hour day schedule for classroom time, implement methods for filling hour blocks of time
 //Classroom class is used to access variables for the room number and location of the schedule
-public class FullDaySchedule extends Classroom {
+public class FullDaySchedule {
 
-        private Classroom currentRoom;
+
         private int dayOfSchedule;
         private int monthOfSchedule;
         private int yearOfSchedule;

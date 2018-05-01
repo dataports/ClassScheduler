@@ -20,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        private ListView classListView;
+        ListView classListView;
         classListView = (ListView) findViewById(R.id.classroom_list_view);
         ArrayList<Classroom> saitClassRoomsBooked = new ArrayList<Classroom>(); //list of all the classrooms time is booked for
         //example classrooms in list
-        Classroom md116 = new Classroom("116", "Stan Grad Center", "MD116")
+        Classroom md116 = new Classroom("116", "Stan Grad Center", "MD116");
         saitClassRoomsBooked.add(md116); //append object into the array of classrooms
         setSupportActionBar(toolbar);
 
