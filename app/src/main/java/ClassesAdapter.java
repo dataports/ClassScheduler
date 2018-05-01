@@ -3,9 +3,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class ClassesAdapter extends BaseAdapter{
-    private Context mContext;
-    private LayoutInflater mInflater;
-    private ArrayList<Classroom> mDataSource; //classroom datatype
+//    private Context mContext;
+//    private LayoutInflater mInflater;
+//    private ArrayList<Classroom> mDataSource; //classroom datatype
 
     @Override
     public int getCount() {

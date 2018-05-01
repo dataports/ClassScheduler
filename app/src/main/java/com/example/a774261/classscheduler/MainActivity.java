@@ -1,5 +1,7 @@
 package com.example.a774261.classscheduler;
 
+import java.lang.*;
+import java.util.*;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +18,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        private ListView classListView;
+        classListView = (ListView) findViewById(R.id.classroom_list_view);
+        ArrayList<Classroom> saitClassRoomsBooked = new ArrayList<Classroom>(); //list of all the classrooms time is booked for
+        //example classrooms in list
+        Classroom md116 = new Classroom("116", "Stan Grad Center", "MD116")
+        saitClassRoomsBooked.add(md116); //append object into the array of classrooms
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
