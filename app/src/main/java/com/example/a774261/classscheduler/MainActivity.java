@@ -1,5 +1,6 @@
 package com.example.a774261.classscheduler;
 
+import java.io.Serializable;
 import java.lang.*;
 import java.util.*;
 import android.os.Bundle;
@@ -12,29 +13,42 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.content.Intent;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements Serializable {
+    ArrayList<Classroom> saitClassRoomsBooked = new ArrayList<Classroom>(); //list of all the classrooms time is booked for
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //UI ELEMENTS
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        toolbar.setTitle("Classes Booked");
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         ListView classListView;
         classListView = (ListView) findViewById(R.id.classroom_list_view);
-        ArrayList<Classroom> saitClassRoomsBooked = new ArrayList<Classroom>(); //list of all the classrooms time is booked for
-        //example classrooms in list
-        Classroom md116 = new Classroom("116", "Stan Grad Center", "MD116");
+        final Intent intent = new Intent(this, AddClassroom.class);
+
+
+        //Create and add classroom objects to list
+        //TODO: make this a file in XML to load classrooms?
+        Classroom md116 = new Classroom("Stan Grad Center", "MD116");
         saitClassRoomsBooked.add(md116); //append object into the array of classrooms
 
-        Classroom md104 = new Classroom("104", "Stan Grad Center", "MD104");
+        Classroom md104 = new Classroom( "Stan Grad Center", "MD104");
         saitClassRoomsBooked.add(md104);
 
+        //Array of strings of size equal to the classroom list
         String[] listItems = new String[saitClassRoomsBooked.size()];
 
-        for(int i = 0; i < saitClassRoomsBooked.size(); i++){
+        //loop to fill the array of strings and use the array adapter to populate the list view withthe items in listItems
+        for(i = 0; i < saitClassRoomsBooked.size(); i++){
             Classroom classroom = saitClassRoomsBooked.get(i);
             listItems[i] = classroom.getRoomName();
         }
@@ -44,14 +58,35 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+            fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                intent.putExtra("classArrayList", saitClassRoomsBooked);
+//                EditText editText = (EditText) findViewById(R.id.editText);
+//                String message = editText.getText().toString();
+//                intent.putExtra(EXTRA_MESSAGE, message);
+                startActivityForResult(intent, 1);
+
             }
         });
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == 1) {
+                Bundle b = data.getExtras();
+                if (b != null){
+                    Classroom classroomOb = (Classroom) b.getSerializable("classObject");
+                    saitClassRoomsBooked.add(classroomOb);
+                    Toast.makeText(getApplicationContext(), classroomOb.getRoomName(),
+                            Toast.LENGTH_LONG).show();
+                    //TODO: enable updates to the list view after receiving data back
+                }
+
+            }
+        }
     }
 
     @Override
